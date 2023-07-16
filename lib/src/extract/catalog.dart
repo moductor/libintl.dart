@@ -116,35 +116,37 @@ class Catalog {
   }
 
   static Entry getDefaultHeaderEntry(ExtractSettings settings) {
-    return Entry(
+    final entry = Entry(
       msgid: "",
       msgstr: getHeaderMsgstr(
         package: settings.packageName,
         version: settings.packageVersion,
         reportBugsTo: settings.reportBugsTo,
       ),
-      translatorComment: [
-        getHeaderComment(
-          package: settings.packageName,
-          copyrightHolder: settings.copyrightHolder,
-        )
-      ],
+      translatorComment: getHeaderComment(
+        package: settings.packageName,
+        copyrightHolder: settings.copyrightHolder,
+      ),
       flags: ["fuzzy"],
       settings: settings,
     );
+    entry.indentTranslatorComment = false;
+    return entry;
   }
 
-  static String getHeaderComment({
+  static List<String> getHeaderComment({
     String? package,
     String? copyrightHolder,
   }) {
     package ??= "PACKAGE";
     copyrightHolder ??= "THE $package'S COPYRIGHT HOLDER";
 
-    return "SOME DESCRIPTIVE TITLE.\n"
-        "Copyright (C) YEAR $copyrightHolder\n"
-        "This file is distributed under the same license as the $package package.\n"
-        "FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n";
+    return [
+      "SOME DESCRIPTIVE TITLE.\n",
+      "Copyright (C) YEAR $copyrightHolder\n",
+      "This file is distributed under the same license as the $package package.\n",
+      "FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.\n",
+    ];
   }
 
   static String getHeaderMsgstr({
