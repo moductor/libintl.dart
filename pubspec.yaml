@@ -1,6 +1,6 @@
 name: libintl
-description: Dart bindings for GNU GetText implementations.
-version: 0.0.1
+description: Dart bindings for libraries implementing GetText. (GLib, libintl, libc, …)
+version: 0.0.2
 repository: https://github.com/gtk-dart/libintl
 
 platforms:
